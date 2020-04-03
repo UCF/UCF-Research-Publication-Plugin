@@ -39,6 +39,7 @@ class ResearchPublication {
 
 		// Register the post type on init
 		add_action( 'init', array( $this, 'register' ), 10, 0 );
+		add_action( 'init', array( $this, 'register_fields' ), 10, 0 );
 	}
 
 	/**
@@ -162,6 +163,185 @@ class ResearchPublication {
 			'ucf_research_publication_taxonomies',
 			array()
 		);
+	}
+
+	/**
+	 * Register the ACF fields
+	 * @author Jim Barnes
+	 * @since 1.0.0
+	 */
+	public function register_fields() {
+
+		if ( ! function_exists('acf_add_local_field_group') ) return;
+
+		// Create the array to add fields to
+		$fields = array();
+
+		$fields[] = array(
+			'key'          => 'publication_type',
+			'label'        => 'Publication Type',
+			'name'         => 'publication_type',
+			'type'         => 'radio',
+			'instructions' => 'Choose the type of publication.',
+			'required'     => 1,
+			'choices'      => array(
+				'book'    => 'Book',
+				'journal' => 'Journal',
+				'digital' => 'Digital',
+			),
+			'allow_null'    => 0,
+			'other_choice'  => 0,
+			'default_value' => 'book',
+			'layout'        => 'vertical',
+			'return_format' => 'value'
+		);
+
+		$fields[] = array(
+			'key'               => 'journal_title',
+			'label'             => 'Journal',
+			'name'              => 'journal_title',
+			'type'              => 'text',
+			'instructions'      => 'The name of the journal.',
+			'required'          => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'journal',
+					),
+				),
+			)
+		);
+
+		$fields[] = array(
+			'key'               => 'publication_url',
+			'label'             => 'Publication URL',
+			'name'              => 'publication_url',
+			'type'              => 'url',
+			'instructions'      => 'The URL to the publication, if available.',
+			'required'          => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'journal',
+					),
+				),
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'digital',
+					),
+				),
+			)
+		);
+
+		$fields[] = array(
+			'key'               => 'website_name',
+			'label'             => 'Website Name',
+			'name'              => 'website_name',
+			'type'              => 'text',
+			'instructions'      => 'The website name of the digital publication.',
+			'required'          => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'digital',
+					),
+				),
+			)
+		);
+
+		$fields[] = array(
+			'key'               => 'publication_advanced_info',
+			'label'             => 'Advanced Info',
+			'name'              => 'publication_advanced_info',
+			'type'              => 'text',
+			'instructions'      => 'Additional information that identifies the source. This may include a volume number or page range.',
+			'required'          => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'book',
+					),
+				),
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '==',
+						'value'    => 'journal',
+					),
+				),
+			)
+		);
+
+		$fields[] = array(
+			'key'               => 'publication_authors',
+			'label'             => 'Authors',
+			'name'              => 'publication_authors',
+			'type'              => 'relationship',
+			'instructions'      => 'Select the authors that are affiliated with UCF.',
+			'required'          => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'field_5e86312c51523',
+						'operator' => '!=empty',
+					),
+				),
+			),
+			'post_type' => array(
+				0 => 'person',
+			),
+			'taxonomy' => '',
+			'filters' => array(
+				0 => 'search',
+			),
+			'min'           => 1,
+			'max'           => 5,
+			'return_format' => 'object',
+		);
+
+		$fields[] = array(
+			'key'            => 'publication_date',
+			'label'          => 'Publication Date',
+			'name'           => 'publication_date',
+			'type'           => 'date_picker',
+			'instructions'   => 'Choose the date of the publication.',
+			'required'       => 1,
+			'display_format' => 'F j, Y',
+			'return_format'  => 'F j, Y',
+			'first_day'      => 0
+		);
+
+		$fields = apply_filters( 'research_publications_fields', $fields );
+
+		//Setup the args
+		$args = array(
+			'key'      => 'research_publications_fields',
+			'title'    => 'Research Publication Fields',
+			'fields'   => $fields,
+			'location' => array(
+				array(
+					array(
+						'param'    => 'post_type',
+						'operator' => '==',
+						'value'    => 'research_publication',
+					),
+				),
+			)
+		);
+
+		$args = apply_filters( 'research_publication_field_args', $args );
+
+		acf_add_local_field_group( $args );
 	}
 }
 
