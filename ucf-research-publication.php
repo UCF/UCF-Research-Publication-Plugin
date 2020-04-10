@@ -19,6 +19,7 @@ define( 'UCF_RESEARCH_PUBLICATION__PLUGIN_FILE', __FILE__ );
 define( 'UCF_RESEARCH_PUBLICATION__PLUGIN_PATH', dirname( __FILE__ ) );
 
 require_once 'includes/class-post-type.php';
+require_once 'includes/class-common.php';
 
 /**
  * Function that runs when the plugin
