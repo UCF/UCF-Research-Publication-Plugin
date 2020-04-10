@@ -206,7 +206,7 @@ class ResearchPublication {
 			'conditional_logic' => array(
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'journal',
 					),
@@ -224,14 +224,14 @@ class ResearchPublication {
 			'conditional_logic' => array(
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'journal',
 					),
 				),
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'digital',
 					),
@@ -249,7 +249,7 @@ class ResearchPublication {
 			'conditional_logic' => array(
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'digital',
 					),
@@ -267,18 +267,34 @@ class ResearchPublication {
 			'conditional_logic' => array(
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'book',
 					),
 				),
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '==',
 						'value'    => 'journal',
 					),
 				),
+			)
+		);
+
+		$fields[] = array(
+			'key'               => 'publication_publisher',
+			'label'             => 'Publisher',
+			'name'              => 'publication_publisher',
+			'type'              => 'text',
+			'instructions'      => 'Enter the publisher\'s information.',
+			'required'          => 0,
+			'conditional_logic' => array(
+				array(
+					'field'    => 'publication_type',
+					'operator' => '==',
+					'value'    => 'book'
+				)
 			)
 		);
 
@@ -292,7 +308,7 @@ class ResearchPublication {
 			'conditional_logic' => array(
 				array(
 					array(
-						'field'    => 'field_5e86312c51523',
+						'field'    => 'publication_type',
 						'operator' => '!=empty',
 					),
 				),
@@ -310,15 +326,50 @@ class ResearchPublication {
 		);
 
 		$fields[] = array(
+			'key'            => 'publication_year',
+			'label'          => 'Publication Year',
+			'name'           => 'publication_year',
+			'type'           => 'date_picker',
+			'instructions'   => 'Choose the date of the publication.',
+			'required'       => 1,
+			'display_format' => 'Y',
+			'return_format'  => 'Y',
+			'first_day'      => 0,
+			'conditional_logic' => array(
+				array(
+					'field'    => 'publication_type',
+					'operator' => '==',
+					'value'    => 'book'
+				)
+			)
+		);
+
+		$fields[] = array(
 			'key'            => 'publication_date',
 			'label'          => 'Publication Date',
 			'name'           => 'publication_date',
 			'type'           => 'date_picker',
 			'instructions'   => 'Choose the date of the publication.',
 			'required'       => 1,
-			'display_format' => 'F j, Y',
-			'return_format'  => 'F j, Y',
-			'first_day'      => 0
+			'display_format' => 'M, Y',
+			'return_format'  => 'M, Y',
+			'first_day'      => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'publication_type',
+						'operator' => '==',
+						'value'    => 'journal',
+					),
+				),
+				array(
+					array(
+						'field'    => 'publication_type',
+						'operator' => '==',
+						'value'    => 'digital',
+					),
+				),
+			)
 		);
 
 		$fields = apply_filters( 'research_publications_fields', $fields );
