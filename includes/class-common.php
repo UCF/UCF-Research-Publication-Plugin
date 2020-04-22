@@ -87,5 +87,5 @@ function get_digital_markup( $publication ) {
 		<p class="publication-details"><?php echo $details; ?></p>
 	</div>
 <?php
-	return apply_filters( 'ucf_research_journal_markup', ob_get_clean(), $publication );
+	return apply_filters( 'ucf_research_digital_markup', ob_get_clean(), $publication );
 }
