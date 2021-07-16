@@ -27,6 +27,8 @@ function get_publication_markup( $publication ) {
 function get_book_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
+	$contributors = get_field( 'publication_contributors', $publication->ID );
+	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
 	$publisher = get_field( 'publication_publisher', $publication->ID );
 	$advanced = get_field( 'publication_advanced_info', $publication->ID );
 	$published_year = get_field( 'publication_year', $publication->ID );
@@ -40,6 +42,7 @@ function get_book_markup( $publication ) {
 	<div class="publication book">
 		<h3 class="h5 publication-title font-italic"><?php echo $publication->post_title; ?></h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
 		<?php if ( ! empty( $details ) ) : ?>
 		<p class="publication-details"><?php echo $details; ?></p>
 		<?php endif; ?>
@@ -51,6 +54,8 @@ function get_book_markup( $publication ) {
 function get_journal_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
+	$contributors = get_field( 'publication_contributors', $publication->ID );
+	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
 	$journal = get_field( 'journal_title', $publication->ID );
 	$advanced = get_field( 'publication_advanced_info', $publication->ID );
 	$published_date = get_field( 'publication_date', $publication->ID );
@@ -64,6 +69,7 @@ function get_journal_markup( $publication ) {
 	<div class="publication journal">
 		<h3 class="h5 publication-title">&ldquo;<?php echo $publication->post_title; ?>&ldquo;</h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
 		<p class="publication-details"><?php echo $details; ?></p>
 	</div>
 <?php
@@ -73,6 +79,8 @@ function get_journal_markup( $publication ) {
 function get_digital_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
+	$contributors = get_field( 'publication_contributors', $publication->ID );
+	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
 	$website = get_field( 'website_name', $publication->ID );
 	$url = get_field( 'publication_url', $publication->ID );
 	$published_date = get_field( 'publication_date', $publication->ID );
@@ -84,6 +92,7 @@ function get_digital_markup( $publication ) {
 	<div class="publication digital">
 		<h3 class="h5 publication-title">&ldquo;<?php echo $publication->post_title; ?>&rdquo;</h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
 		<p class="publication-details"><?php echo $details; ?></p>
 	</div>
 <?php

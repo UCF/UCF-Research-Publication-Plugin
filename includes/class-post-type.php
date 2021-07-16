@@ -220,20 +220,12 @@ class ResearchPublication {
 			'name'              => 'publication_url',
 			'type'              => 'url',
 			'instructions'      => 'The URL to the publication, if available.',
-			'required'          => 1,
+			'required'          => 0,
 			'conditional_logic' => array(
 				array(
 					array(
 						'field'    => 'publication_type',
-						'operator' => '==',
-						'value'    => 'journal',
-					),
-				),
-				array(
-					array(
-						'field'    => 'publication_type',
-						'operator' => '==',
-						'value'    => 'digital',
+						'operator' => '!=empty',
 					),
 				),
 			)
@@ -323,6 +315,36 @@ class ResearchPublication {
 			'min'           => 1,
 			'max'           => 5,
 			'return_format' => 'object',
+		);
+
+		$fields[] = array(
+			'key'               => 'publication_contributors',
+			'label'             => 'Contributors',
+			'name'              => 'publication_contributors',
+			'type'              => 'repeater',
+			'instructions'      => 'Add publication contributor\'s.',
+			'required'          => 0,
+			"min"				=> 0,
+			"max"				=> 10,
+			"layout"			=> "table",
+			'sub_fields'		=> array(
+				array(
+					'key'               => 'publication_contributor',
+					'label'             => 'Contributor',
+					'name'              => 'publication_contributor',
+					'type'              => 'text',
+					'instructions'      => 'Add publication contributor.',
+					'required'          => 0,
+				),
+			),
+			'conditional_logic' => array(
+				array(
+					array(
+						'field'    => 'publication_type',
+						'operator' => '!=empty',
+					),
+				),
+			),
 		);
 
 		$fields[] = array(
