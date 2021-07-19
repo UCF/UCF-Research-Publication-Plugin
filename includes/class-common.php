@@ -28,7 +28,7 @@ function get_book_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
 	$contributors = get_field( 'publication_contributors', $publication->ID );
-	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
+	$contributor_string = ( ! empty( $contributors ) ) ? implode( ', ', array_column( $contributors, 'publication_contributor' ) ) : '';
 	$publisher = get_field( 'publication_publisher', $publication->ID );
 	$advanced = get_field( 'publication_advanced_info', $publication->ID );
 	$published_year = get_field( 'publication_year', $publication->ID );
@@ -55,7 +55,7 @@ function get_journal_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
 	$contributors = get_field( 'publication_contributors', $publication->ID );
-	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
+	$contributor_string = ( ! empty( $contributors ) ) ? implode( ', ', array_column( $contributors, 'publication_contributor' ) ) : '';
 	$journal = get_field( 'journal_title', $publication->ID );
 	$advanced = get_field( 'publication_advanced_info', $publication->ID );
 	$published_date = get_field( 'publication_date', $publication->ID );
@@ -80,7 +80,7 @@ function get_digital_markup( $publication ) {
 	$authors = get_field( 'publication_authors', $publication->ID );
 	$author_string = implode( ', ', array_column( $authors, 'post_title' ) );
 	$contributors = get_field( 'publication_contributors', $publication->ID );
-	$contributor_string = implode( ', ', array_column( $contributors, 'publication_contributor' ) );
+	$contributor_string = ( ! empty( $contributors ) ) ? implode( ', ', array_column( $contributors, 'publication_contributor' ) ) : '';
 	$website = get_field( 'website_name', $publication->ID );
 	$url = get_field( 'publication_url', $publication->ID );
 	$published_date = get_field( 'publication_date', $publication->ID );
