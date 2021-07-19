@@ -42,7 +42,9 @@ function get_book_markup( $publication ) {
 	<div class="publication book">
 		<h3 class="h5 publication-title font-italic"><?php echo $publication->post_title; ?></h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<?php if( ! empty( $contributors ) ) : ?>
 		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
+		<?php endif; ?>
 		<?php if ( ! empty( $details ) ) : ?>
 		<p class="publication-details"><?php echo $details; ?></p>
 		<?php endif; ?>
@@ -69,7 +71,9 @@ function get_journal_markup( $publication ) {
 	<div class="publication journal">
 		<h3 class="h5 publication-title">&ldquo;<?php echo $publication->post_title; ?>&ldquo;</h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<?php if( ! empty( $contributors ) ) : ?>
 		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
+		<?php endif; ?>
 		<p class="publication-details"><?php echo $details; ?></p>
 	</div>
 <?php
@@ -92,7 +96,9 @@ function get_digital_markup( $publication ) {
 	<div class="publication digital">
 		<h3 class="h5 publication-title">&ldquo;<?php echo $publication->post_title; ?>&rdquo;</h3>
 		<p class="publication-authors"><?php echo $author_string; ?></p>
+		<?php if( ! empty( $contributors ) ) : ?>
 		<p class="publication-contributors"><?php echo $contributor_string; ?></p>
+		<?php endif; ?>
 		<p class="publication-details"><?php echo $details; ?></p>
 	</div>
 <?php
