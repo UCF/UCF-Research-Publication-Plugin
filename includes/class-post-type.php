@@ -322,7 +322,7 @@ class ResearchPublication {
 			'label'             => 'Contributors',
 			'name'              => 'publication_contributors',
 			'type'              => 'repeater',
-			'instructions'      => 'Add publication contributor\'s.',
+			'instructions'      => 'Add publication contributors.',
 			'required'          => 0,
 			"min"				=> 0,
 			"max"				=> 10,
