@@ -1,0 +1,8 @@
+{
+    "name": "ucf/ucf-research-publication-plugin",
+    "description": "Plugin that provides a custom post type and taxonomies for UCF research publications.",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}

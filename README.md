@@ -15,9 +15,12 @@ Head over to the [UCF Research Publication Plugin wiki](https://github.com/UCF/U
 
 ## Changelog ##
 
+### 1.1.1 ###
+Enhancements:
+* Added composer file.
+
 ### 1.1.0 ###
 * Added publication contributors
-
 
 ### 1.0.0 ###
 * Initial release
